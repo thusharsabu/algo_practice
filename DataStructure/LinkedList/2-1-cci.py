@@ -26,14 +26,14 @@ def remove_without_memory(linked_list):
   while current_node:
     prev = current_node
     current_value = current_node.value
-    next_value = current_node.next
-    while next_value:
-      if next_value.value is current_value:
-        prev.next = next_value.next
-        next_value = next_value.next
+    next_node = current_node.next
+    while next_node:
+      if next_node.value is current_value:
+        prev.next = next_node.next
+        next_node = next_node.next
       else:
-        prev = next_value
-        next_value = next_value.next
+        prev = next_node
+        next_node = next_node.next
     current_node = current_node.next
 
 linked_list = LinkedList()
