@@ -10,20 +10,28 @@
 # The expected time complexity for this problem is O(n) and the expected
 # space-complexity is O(1).
 
-
 def duplicate_number(arr):
     len_arr = len(arr)
+    expected_total = ((len_arr - 2) * (len_arr-1)) // 2
+    current_total = 0
+    for value in arr:
+        current_total += value
+    
+    return abs(expected_total - current_total)
 
-    expected_sum = 0
-    current_sum = 0
+# def duplicate_number(arr):
+    # len_arr = len(arr)
 
-    for i in range(len_arr - 1):
-      expected_sum += i
+    # expected_sum = 0
+    # current_sum = 0
 
-    for num in arr:
-        current_sum += num
+    # for i in range(len_arr - 1):
+    #   expected_sum += i
 
-    return current_sum - expected_sum
+    # for num in arr:
+    #     current_sum += num
+
+    # return current_sum - expected_sum
 
 
 
@@ -34,6 +42,7 @@ def test_function(test_case):
     if output == solution:
         print("Pass")
     else:
+        print(output)
         print("Fail")
 
 
