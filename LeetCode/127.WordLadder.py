@@ -48,23 +48,23 @@ class Solution:
         new_list = []
 
         for char in words:
-            if char == endWord:
-                # print(
-                #     "Reached here: char is: {}, and EndWord: {}".format(char, endWord)
-                # )
-                new_list.append([char])
-                return new_list
             if self.hamming_distance(char, current_word) == 1:
-                new_words = copy.deepcopy(words)
-                new_words.remove(char)
-                value = self.ladder_length(new_words, char, endWord)
+                if char == endWord:
+                    
+                else:
+                    new_words = copy.deepcopy(words)
+                    new_words.remove(char)
+                    value = self.ladder_length(new_words, char, endWord)
 
-                if value != 0 and value is not None:
-                    for each_ele in value:
-                        each_ele.insert(0, char)
+                    if value != 0 and value is not None:
+                        for each_ele in value:
+                            print("Inside: ")
+                            each_ele.insert(0, char)
                         new_list.append(each_ele)
-
+        print("Reached")
         if len(new_list) > 0:
+            print("Current: {}".format(new_list))
+            print("++++++++++++++++++++++++++++")
             return new_list
         else:
             return 0
@@ -79,5 +79,5 @@ class Solution:
 
 
 caller = Solution()
-print(caller.ladderLength('hit', 'cog', ["hot","dot","dog","lot","log","cog"]))
+print(caller.ladderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))
 # print(caller.ladderLength("lot", "cog", ["log", "cog"]))
