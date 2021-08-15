@@ -12,22 +12,39 @@
 
 import copy
 
-def permute(l):
-  new_list = []
+# def permute(l):
+#   new_list = []
 
-  if len(l) == 0:
-    new_list.append([])
-  else:
-    first_ele = l[0]
-    rest_ele = permute(l[1:])
+#   if len(l) == 0:
+#     new_list.append([])
+#   else:
+#     first_ele = l[0]
+#     rest_ele = permute(l[1:])
 
-    for each_ele in rest_ele:
-      for i in range(0, len(each_ele)+1):
-        each_ele_new = copy.deepcopy(each_ele)
-        each_ele_new.insert(i, first_ele)
-        new_list.append(each_ele_new)
+#     for each_ele in rest_ele:
+#       for i in range(0, len(each_ele)+1):
+#         each_ele_new = copy.deepcopy(each_ele)
+#         each_ele_new.insert(i, first_ele)
+#         new_list.append(each_ele_new)
     
-  return new_list
+#   return new_list
+
+def permute(l):
+
+  new_arr = []
+  if len(l) == 0:
+    new_arr.append([])
+    return new_arr
+
+  current = l[0]
+  remaining = permute(l[1:])
+
+  for each_ele in remaining:
+    for i in range(len(each_ele) + 1):
+      ins = copy.deepcopy(each_ele)
+      ins.insert(i, current)
+      new_arr.append(ins)
+  return new_arr
 
 
 def check_output(output, expected_output):
@@ -52,6 +69,8 @@ def check_output(output, expected_output):
     o.sort()
     e.sort()
     return o == e
+
+
 
 print ("Pass" if  (check_output(permute([]), [[]])) else "Fail")
 print ("Pass" if  (check_output(permute([0]), [[0]])) else "Fail")

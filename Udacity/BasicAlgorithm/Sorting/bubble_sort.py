@@ -21,17 +21,28 @@
 #     print("j " + str(j))
 #     return arr
 
+# def bubble_sort(arr):
+#     sorted = False
+#     count = 0
+#     while not sorted:
+#         sorted = True
+#         for i in range(len(arr) - 1):
+#             count += 1
+#             if arr[i] > arr[i+1]:
+#                 sorted = False
+#                 arr[i], arr[i+1] = arr[i+1], arr[i]
+#     print(count)
+#     return arr
+
 def bubble_sort(arr):
-    sorted = False
-    count = 0
-    while not sorted:
-        sorted = True
+    sorted_ = False
+
+    while not sorted_:
+        sorted_ = True
         for i in range(len(arr) - 1):
-            count += 1
             if arr[i] > arr[i+1]:
-                sorted = False
+                sorted_ = False
                 arr[i], arr[i+1] = arr[i+1], arr[i]
-    print(count)
     return arr
 
 

@@ -24,6 +24,21 @@
 #           l[index - 1] = temp
 #   return l
 
+# def bubble_sort(arr):
+#   sorted = False
+
+#   while not sorted:
+#     sorted = True
+
+#     for i in range(len(arr) - 1):
+#       if arr[i][0] < arr[i + 1][0]:
+#         sorted = False
+#         arr[i], arr[i + 1] = arr[i + 1], arr[i]
+#       elif arr[i][0] == arr[i + 1][0] and arr[i][1] < arr[i + 1][1]:
+#         sorted = False
+#         arr[i], arr[i + 1] = arr[i + 1], arr[i]
+#   return arr
+
 def bubble_sort(arr):
   sorted = False
 
@@ -31,12 +46,13 @@ def bubble_sort(arr):
     sorted = True
 
     for i in range(len(arr) - 1):
-      if arr[i][0] < arr[i + 1][0]:
+      if arr[i][0] == arr[i+1][0]:
+        if arr[i][1] < arr[i+1][1]:
+          sorted = False
+          arr[i], arr[i+1] = arr[i+1], arr[i]
+      elif arr[i][0] < arr[i+1][0]:
         sorted = False
-        arr[i], arr[i + 1] = arr[i + 1], arr[i]
-      elif arr[i][0] == arr[i + 1][0] and arr[i][1] < arr[i + 1][1]:
-        sorted = False
-        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        arr[i], arr[i+1] = arr[i+1], arr[i]
   return arr
 
 sleep_times = [(24,13), (21,55), (23,20), (22,5), (24,23), (21,58), (24,3)]

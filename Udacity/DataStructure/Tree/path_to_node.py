@@ -43,39 +43,61 @@ def convert_arr_to_binary_tree(arr):
     return root
 
 
-def path_from_root_to_node(root, data):
+def path_from_root_to_node1(root, data):
     """
     Assuming data as input to find the node
     The solution can be easily changed to find a node instead of data
     :param data:
     :return:
     """
-    output = path_from_node_to_root(root, data)
+    output = path_from_node_to_root1(root, data)
     if output is None:
         return None
 
     return list(reversed(output))
 
 
-def path_from_node_to_root(root, data):
+def path_from_node_to_root1(root, data):
     if root is None:
         return None
 
     if root.data == data:
         return [data]
 
-    left_path = path_from_node_to_root(root.left, data)
+    left_path = path_from_node_to_root1(root.left, data)
 
     if left_path is not None:
         left_path.append(root.data)
         return left_path
 
-    right_path = path_from_node_to_root(root.right, data)
+    right_path = path_from_node_to_root1(root.right, data)
     if right_path is not None:
         right_path.append(root.data)
         return right_path
 
     return None
+
+def path_from_root_to_node(root, data):
+    path = []
+
+    def dfs(node, data):
+        if node.data == data:
+            path.append(data)
+            return True
+        
+        if node.left and dfs(node.left, data):
+            path.append(node.data)
+            return True
+        
+        if node.right and dfs(node.right, data):
+            path.append(node.data)
+            return True
+        
+        return False
+    
+    dfs(root, data)
+    return list(reversed(path))
+
 
 
 def test_function(test_case):
@@ -121,3 +143,6 @@ solution = [1, 3, 5,8]
 
 test_case = [arr, data, solution]
 test_function(test_case)
+
+
+

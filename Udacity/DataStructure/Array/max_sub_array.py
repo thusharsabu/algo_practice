@@ -11,7 +11,7 @@
 # arr = [1, 2, -5, -4, 1, 6]
 # The largest sum is 7, which is the sum of the last two elements of the array.
 
-def max_sub_array(arr):
+def max_sub_array1(arr):
   max_value = current_value = arr[0] 
 
   for value in arr[1:]:
@@ -24,6 +24,19 @@ def max_sub_array(arr):
   
   return max_value
 
+def max_sub_array(arr):
+    high = current = arr[0]
+    for val in arr[1:]:
+        current = max(current + val, val)
+        
+        if current > high:
+            high = current
+    return high
+
 
 print(max_sub_array([1, 2, 3, -4, 6]))
 print(max_sub_array([1, 2, -5, -4, 1, 6]))
+
+print("Old")
+print(max_sub_array1([1, 2, 3, -4, 6]))
+print(max_sub_array1([1, 2, -5, -4, 1, 6]))

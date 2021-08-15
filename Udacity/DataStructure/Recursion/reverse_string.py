@@ -7,12 +7,18 @@
 # Returns:
 #   a string that is the reverse of input
 
-def reverse_string(str_value):
-  if len(str_value) <= 1:
-    return str_value
+# def reverse_string(str_value):
+#   if len(str_value) <= 1:
+#     return str_value
   
-  return reverse_string(str_value[1:]) + str_value[:1]
+#   return reverse_string(str_value[1:]) + str_value[:1]
 
+
+def reverse_string(input):
+  if len(input) <= 1:
+    return input
+  
+  return (reverse_string(input[1:]) + input[:1])
 
 print ("Pass" if  ("" == reverse_string("")) else "Fail")
 print ("Pass" if  ("cba" == reverse_string("abc")) else "Fail")

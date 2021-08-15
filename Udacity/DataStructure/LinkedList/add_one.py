@@ -12,23 +12,38 @@
 # input = [9, 9, 9]
 # output = [1, 0, 0, 0]
 
+# def add_one(arr):
+#   carry = 1
+#   len_arr = len(arr)
+#   last_index = len_arr - 1
+#   for index in range(len_arr):
+#     total = arr[last_index - index] + carry
+#     carry = 0
+#     if total >= 10:
+#       carry = 1
+#       arr[last_index - index] = total % 10
+#     else:
+#       arr[last_index - index] = total
+
+#   if carry == 0:
+#     return arr
+#   else:
+#     return [1] + arr
+
 def add_one(arr):
   carry = 1
-  len_arr = len(arr)
-  last_index = len_arr - 1
-  for index in range(len_arr):
-    total = arr[last_index - index] + carry
-    carry = 0
-    if total >= 10:
-      carry = 1
-      arr[last_index - index] = total % 10
-    else:
-      arr[last_index - index] = total
 
-  if carry == 0:
-    return arr
-  else:
-    return [1] + arr
+  for index in range(len(arr)-1, -1, -1):
+    total = arr[index] + carry
+
+    if total > 9:
+      arr[index] = total % 10
+      carry = total //10
+    else:
+      arr[index] = total
+      return arr
+  return [carry] + arr
+  
 
 def test_function(test_case):
     arr = test_case[0]

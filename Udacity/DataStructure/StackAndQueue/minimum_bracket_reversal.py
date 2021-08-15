@@ -50,5 +50,73 @@ class Stack:
         return self.num_elements == 0
 
 
-def minimum_bracket_reversals(input):
-  
+# def minimum_bracket_reversals(input):
+#     stack = []
+#     count = 0
+
+#     for value in input:
+#         if value == '{':
+#             stack.append(value)
+#         if value == '}':
+#             if len(stack) > 0 and stack[-1] == '{':
+#                 stack.pop()
+#             else:
+#                 count += 1
+#                 stack.append('{')
+#     print(stack)
+#     if len(stack) != 0:
+#         return -1
+    
+#     return count
+
+def minimum_bracket_reversals(input_string):
+    if len(input_string) % 2 == 1:
+        return -1
+
+    stack = Stack()
+    count = 0
+    for bracket in input_string:
+        if stack.is_empty():
+            stack.push(bracket)
+        else:
+            top = stack.top()
+            if top != bracket:
+                if top == '{':
+                    stack.pop()
+                    continue
+            stack.push(bracket)
+
+    ls = list()
+    while not stack.is_empty():
+        first = stack.pop()
+        second = stack.pop()
+        ls.append(first)
+        ls.append(second)
+        if first == '}' and second == '}':
+            count += 1
+        elif first == '{' and second == '}':
+            count += 2
+        elif first == '{' and second == '{':
+            count += 1
+    return count
+
+
+def test_function(test_case):
+    input_string = test_case[0]
+    expected_output = test_case[1]
+    output = minimum_bracket_reversals(input_string)
+    
+    if output == expected_output:
+        print("Pass")
+    else:
+        print("Fail")
+
+test_case_1 = ["}}}}", 2]
+test_function(test_case_1)
+
+test_case_2 = ["}}{{", 2]          
+test_function(test_case_2)
+
+test_case_3 = ["{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}", 13]
+test_function(test_case_3)
+            

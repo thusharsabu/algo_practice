@@ -38,20 +38,34 @@ def get_chars(num):
         return ''
 
 
-def keypad(num):
-    if num <= 9:
-        return list(get_chars(num))
+# def keypad(num):
+#     if num <= 9:
+#         return list(get_chars(num))
 
+#     current_num = num % 10
+
+#     remaining_perm = keypad(num // 10)
+
+#     new_list = []
+
+#     for char in get_chars(current_num):
+#         for each_remaining in remaining_perm:
+#             new_list.append(each_remaining+char)
+
+#     return new_list
+
+def keypad(num):
+    if num < 10:
+        return list(get_chars(num))
     current_num = num % 10
 
-    remaining_perm = keypad(num // 10)
+    remaining = keypad(num//10)
 
     new_list = []
 
     for char in get_chars(current_num):
-        for each_remaining in remaining_perm:
-            new_list.append(each_remaining+char)
-
+        for ele in remaining:
+            new_list.append(ele + char)
     return new_list
 
 

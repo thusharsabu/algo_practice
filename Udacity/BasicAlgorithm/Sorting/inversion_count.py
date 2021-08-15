@@ -53,30 +53,66 @@
 #     return merge(left, right, count)
 
 
-def merge_sort(arr, inversion):
-    if len(arr) <= 1:
-        return arr
-    mid = len(arr) // 2
-    left = merge_sort(arr[:mid])
-    right = merge_sort(arr[mid:])
-    return merge(left, right)
+# def merge_sort(arr, inversion):
+#     if len(arr) <= 1:
+#         return arr
+#     mid = len(arr) // 2
+#     left = merge_sort(arr[:mid])
+#     right = merge_sort(arr[mid:])
+#     return merge(left, right)
 
-def merge(left, right):
-    if left == None or len(left) == 0:
-        return right
-    elif right == None or len(right) == 0:
-        return left
-    left_index = right_index = 0
-    new_arr = []
-    while left_index < len(left) and right_index < len(right):
-        if left[left_index] < right[right_index]:
-            new_arr.append()
-            left_index += 1
+# def merge(left, right):
+#     if left == None or len(left) == 0:
+#         return right
+#     elif right == None or len(right) == 0:
+#         return left
+#     left_index = right_index = 0
+#     new_arr = []
+#     while left_index < len(left) and right_index < len(right):
+#         if left[left_index] < right[right_index]:
+#             new_arr.append()
+#             left_index += 1
+#         else:
+#             new_arr.append(right[right_index])
+#             right_index += 1
+#     return new_arr + left[left_index:] + right[right_index:]
+
+
+def merge(left, right, count):
+
+    i = j = 0
+
+    left_len = len(left)
+    right_len = len(right)
+    merged = []
+    # print('--------------')
+    # print(f"Left is: {left}")
+    # print(f"Right is {right}")
+    while i < left_len and j < right_len:
+        # print(f"I value is: {left[i]} and j is {right[j]}")
+        if left[i] > right[j]:
+            count += len(left)
+            merged.append(right[j])
+            j += 1
         else:
-            new_arr.append(right[right_index])
-            right_index += 1
-    return new_arr + left[left_index:] + right[right_index:]
+            merged.append(left[i])
+            i += 1
+    
+    return [(merged + left[i:] + right[j:]), count]
 
+def merge_sort(arr):
+    if len(arr) == 1:
+        return [arr, 0]
+
+    mid = len(arr) // 2
+
+    left, left_count = merge_sort(arr[:mid])
+    right, right_count = merge_sort(arr[mid:])
+
+    return merge(left, right, left_count + right_count)
 
 # print(merge_sort([10, 9, 8, 7, 6, 5, 4, 3, 2], 0))
-print(merge_sort([7, 5, 3, 1], 0))
+print(merge_sort([7, 5, 3, 1]))
+print(merge_sort([3, 1, 2, 4]))
+# print(merge_sort([7, 5, 3, 1]))
+print(merge_sort([5, 3, 1]))

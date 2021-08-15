@@ -12,7 +12,7 @@
 # output = [1, 0, 0, 0]
 
 
-def add_one(arr, borrow):
+def add_one1(arr, borrow):
     arr_len = len(arr) - 1
 
     while arr_len != -1:
@@ -24,6 +24,17 @@ def add_one(arr, borrow):
             arr[arr_len] = add_value
             return arr
 
+    return [1] + arr
+
+def add_one(arr, borrow):    
+    for i in range(len(arr) - 1, -1, -1):
+        if borrow == 0:
+            break
+        if (arr[i] + borrow) > 9:
+            arr[i] = 0
+        else:
+            arr[i] = arr[i] + borrow
+            return arr
     return [1] + arr
 
 

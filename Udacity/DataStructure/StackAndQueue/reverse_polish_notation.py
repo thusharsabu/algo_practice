@@ -17,13 +17,12 @@
 
 
 class LinkedListNode:
-
     def __init__(self, data):
         self.data = data
         self.next = None
 
-class Stack:
 
+class Stack:
     def __init__(self):
         self.num_elements = 0
         self.head = None
@@ -56,29 +55,36 @@ class Stack:
     def is_empty(self):
         return self.num_elements == 0
 
+
 import operator
+
+
 def evaluate_post_fix(input):
-  stack = Stack()
-  operators = {
-    '+' : operator.add,
-    '-' : operator.sub,
-    '*' : operator.mul,
-    '/' : operator.truediv,
-    '%' : operator.mod,
-    '^' : operator.xor,
-  }
+    stack = Stack()
+    operators = {
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "/": operator.truediv,
+        "%": operator.mod,
+        "^": operator.xor,
+    }
+
+    for value in input:
+        if value in operators:
+            second_value = stack.pop()
+            first_value = stack.pop()
+            print(f"First: {first_value} and Second: {second_value}")
+            stack.push(int(operators[value](int(first_value), int(second_value))))
+        else:
+            stack.push(value)
+    return stack.pop()
 
 
-  for value in input:
-    if value in operators:
-      second_value = stack.pop()
-      first_value = stack.pop()
-      stack.push(int(operators[value](int(first_value), int(second_value))))
-    else:
-      stack.push(value)
-  return stack.pop()
-
-print(evaluate_post_fix(["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]))
+# print(
+#     evaluate_post_fix(
+#         ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
+#     )
+# )
 print(evaluate_post_fix(["3", "1", "+", "4", "*"]))
-print(evaluate_post_fix(["4", "13", "5", "/", "+"]))
-
+# print(evaluate_post_fix(["4", "13", "5", "/", "+"]))
