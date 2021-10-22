@@ -4,7 +4,7 @@ def anagram_checker1(str1, str2):
     )
 
 
-def anagram_checker(str1, str2):
+def anagram_checker2(str1, str2):
     new_str1 = str1.replace(" ", "")
     new_str2 = str2.replace(" ", "")
 
@@ -23,6 +23,22 @@ def anagram_checker(str1, str2):
         i += 1
     for value in char_seq:
         if value != 0:
+            return False
+    return True
+
+def anagram_checker(str1, str2):
+    container = [0]*26
+    
+    for char in str1:
+        if not ord(char) == 32:
+            container[ord(char.lower()) - 97] += 1
+
+    for char in str2:
+        if not ord(char) == 32:
+            container[ord(char.lower()) - 97] -= 1
+    
+    for i in range(len(container)):
+        if container[i] != 0:
             return False
     return True
 

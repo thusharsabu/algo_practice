@@ -34,7 +34,6 @@ def duplicate_number(arr):
     # return current_sum - expected_sum
 
 
-
 def test_function(test_case):
     arr = test_case[0]
     solution = test_case[1]
