@@ -4,7 +4,7 @@ from confluent_kafka import SerializingProducer
 class KafkaProducer:
     def kafkaConfigs(self):
         return {
-            # "bootstrap.servers": self.get_variable("keyName"),
+            # "bootstrap.servers": ,
             #
             # Add All configs here
 

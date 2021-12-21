@@ -182,3 +182,5 @@ class LinkedList:
 
 # # Test size
 # assert linked_list.size() == 5, f"list contents: {linked_list.to_list()}"
+
+
