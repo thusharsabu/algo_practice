@@ -1,4 +1,5 @@
-# Implement an algorithm to determine if a string has all unoque characters. What if you cannot use additional datastructures
+# Implement an algorithm to determine if a string has all unoque characters.
+# What if you cannot use additional datastructures
 
 # Solutions
 # 1. sort and check
