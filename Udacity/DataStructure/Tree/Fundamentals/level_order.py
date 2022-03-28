@@ -18,6 +18,20 @@ tree.get_root().get_left_child().set_right_child(Node("Mango"))
 
 
 def level_order(root, result):
+    print("new One")
+    queue = [root]
+
+    while queue:
+        node = queue.pop(0)
+        if node:
+            result.append(node.value)
+
+            queue.append(node.get_right_child())
+            queue.append(node.get_left_child())
+    return result
+
+
+def level_order(root, result):
     if result is None:
         return
 
@@ -25,7 +39,6 @@ def level_order(root, result):
     queue.append(root)
 
     while queue:
-        print(queue)
         node = queue.pop(0)
         if node is not None:
             result.append(node.value)
@@ -38,5 +51,5 @@ def level_order(root, result):
     return result
 
 
-print("Recursive: ")
+print("Iterative: ")
 print(level_order(tree.get_root(), []))

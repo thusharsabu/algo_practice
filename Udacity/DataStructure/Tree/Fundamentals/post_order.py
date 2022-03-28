@@ -37,6 +37,28 @@ print(post_order_recursive(tree.get_root(), []))
 
 
 def post_order_iterative(root, result):
+    stack = []
+    visited = set()
+    node = root
+
+    while stack or node:
+        if node:
+            stack.append(node)
+            node = node.get_left_child()
+        else:
+            node = stack.pop()
+
+            if node in visited or node.get_right_child() is None:
+                result.append(node.value)
+                node = None
+            else:
+                visited.add(node)
+                stack.append(node)
+                node = node.get_right_child()
+    return result
+
+
+def post_order_iterative1(root, result):
     if root is None:
         return None
 

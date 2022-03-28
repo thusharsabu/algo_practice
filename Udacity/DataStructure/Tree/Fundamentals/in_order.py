@@ -16,6 +16,7 @@ tree.get_root().get_left_child().set_right_child(Node("Mango"))
 #     /   \
 # dates  Mango
 
+
 def in_order_recursive(root, result):
     if root is None:
         return
@@ -34,6 +35,22 @@ print(in_order_recursive(tree.get_root(), []))
 
 
 def in_order_iterative(root, result):
+    stack = []
+    node = root
+
+    while stack or node:
+        if node:
+            stack.append(node)
+            node = node.get_left_child()
+
+        else:
+            value = stack.pop()
+            result.append(value.value)
+            node = value.get_right_child()
+    return result
+
+
+def in_order_iterative1(root, result):
     if root is None:
         return
 
@@ -53,4 +70,4 @@ def in_order_iterative(root, result):
 
 
 print("Iterative: ")
-print(in_order_recursive(tree.get_root(), []))
+print(in_order_iterative(tree.get_root(), []))

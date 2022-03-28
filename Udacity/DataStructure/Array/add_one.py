@@ -12,21 +12,21 @@
 # output = [1, 0, 0, 0]
 
 
+def add_one(arr, asd):
+    borrow = 1
+    i = len(arr) - 1
+
+    while borrow and i >= 0:
+        val = arr[i] + borrow
+
+        arr[i] = val % 10
+        borrow = val // 10
+
+        i -= 1
+    return arr if borrow == 0 else [borrow] + arr
+
+
 def add_one1(arr, borrow):
-    arr_len = len(arr) - 1
-
-    while arr_len != -1:
-        add_value = arr[arr_len] + borrow
-        if add_value % 10 == 0:
-            arr[arr_len] = 0
-            arr_len -= 1
-        else:
-            arr[arr_len] = add_value
-            return arr
-
-    return [1] + arr
-
-def add_one(arr, borrow):    
     for i in range(len(arr) - 1, -1, -1):
         if borrow == 0:
             break

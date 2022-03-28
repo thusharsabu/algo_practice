@@ -10,9 +10,10 @@
 
 
 class Node:
-  def __init__(self, value):
-    self.value = value
-    self.next = None
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
 
 class LinkedList:
     def __init__(self):
@@ -32,69 +33,122 @@ class LinkedList:
             current_node = current_node.next
 
     def print_linked_list(self):
-      current_node = self.head
-      while current_node is not None:
-          print(str(current_node.value)+ " ->", end='')
-          current_node = current_node.next
-      print('')
+        current_node = self.head
+        while current_node is not None:
+            print(str(current_node.value) + " ->", end="")
+            current_node = current_node.next
+        print("")
+
     def get_tail(self):
-      current_node = self.head
-      while current_node.next is not None:
-          current_node = current_node.next
-      return current_node
+        current_node = self.head
+        while current_node.next is not None:
+            current_node = current_node.next
+        return current_node
 
-def even_after_odd(head, linked_list):
-  tail = find_tail(head)
-  current_node = head
-  prev = head
-  first_occurence= None
-  while current_node is not None:
-    if first_occurence == current_node:
-      return head
-    # linked_list.print_linked_list()
-    if current_node.value % 2 == 0:
-      if current_node.next is not None:
-        if current_node == head:
-          print("not reaching here: ")
-          head = current_node.next
-          current_node.next = None
-          tail.next = current_node
-          tail = tail.next
-          current_node = head
-          prev = head
+
+def even_after_odd1(head, linked_list):
+    tail = find_tail(head)
+    current_node = head
+    prev = head
+    first_occurence = None
+    while current_node is not None:
+        if first_occurence == current_node:
+            return head
+        # linked_list.print_linked_list()
+        if current_node.value % 2 == 0:
+            if current_node.next is not None:
+                if current_node == head:
+                    print("not reaching here: ")
+                    head = current_node.next
+                    current_node.next = None
+                    tail.next = current_node
+                    tail = tail.next
+                    current_node = head
+                    prev = head
+                else:
+
+                    prev.next = current_node.next
+                    current_node.next = None
+                    linked_list.print_linked_list()
+                    tail.next = current_node
+                    tail = tail.next
+                    current_node = prev.next
+                    print("After exchange")
+                    linked_list.print_linked_list()
+            else:
+                prev = current_node
+                current_node = current_node.next
+            if first_occurence == None:
+                first_occurence = tail
         else:
+            prev = current_node
+            current_node = current_node.next
+    return head
 
-          prev.next = current_node.next
-          current_node.next = None
-          linked_list.print_linked_list()
-          tail.next = current_node
-          tail = tail.next
-          current_node = prev.next
-          print("After exchange")
-          linked_list.print_linked_list()
-      else:
-        prev = current_node
-        current_node = current_node.next
-      if first_occurence == None:
-        first_occurence = tail
-    else:
-      prev = current_node
-      current_node = current_node.next
-  return head
 
 head = Node
 
 
 def find_tail(head):
-  while head.next is not None:
-    head = head.next
-  return head
+    while head.next is not None:
+        head = head.next
+    return head
+
+
+class EvenAfterOdd:
+    def __init__(self) -> None:
+        self.even = None
+        self.odd = None
+        self.evenTail = None
+        self.oddTail = None
+
+    def addEven(self, node):
+        if self.even:
+            self.evenTail.next = node
+            self.evenTail = node
+        else:
+            self.even = node
+            self.evenTail = node
+
+        self.evenTail.next = None
+
+    def addOdd(self, node):
+        if self.odd:
+            self.oddTail.next = node
+            self.oddTail = node
+        else:
+            self.odd = node
+            self.oddTail = node
+
+        self.oddTail.next = None
+
+    def combine(self, ll):
+        self.oddTail.next = self.even
+
+        ll.head = self.odd
+
+    def evenAfterOdd(self, ll):
+        current = ll.head
+
+        while current:
+            value = current
+            current = current.next
+
+            if value.value % 2 == 0:
+                self.addEven(value)
+            else:
+                self.addOdd(value)
+        self.combine
 
 
 linked_list = LinkedList()
 linked_list.create_list([1, 2, 3, 4, 5, 6])
 # linked_list.print_linked_list()
+
+eo = EvenAfterOdd()
+eo.evenAfterOdd(linked_list)
+eo.combine(linked_list)
 print("")
-even_after_odd(linked_list.head, linked_list)
+# even_after_odd(linked_list.head, linked_list)
 print("Output")
 linked_list.print_linked_list()

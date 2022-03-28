@@ -71,7 +71,31 @@ print("Recursive: ")
 print(pre_order_recursive(tree.get_root(), []))
 
 
-def pre_order_iterative(root, result):
+def pre_order_iterative1(root, result):
+    if root is None:
+        return result
+
+    stack = []
+    node = root
+    visited = set()
+
+    while stack or node:
+        if node:
+            result.append(node.value)
+            stack.append(node)
+            node = node.get_left_child()
+        else:
+            node = stack.pop()
+
+            if node not in visited and node.has_right_child():
+                visited.add(node)
+                node = node.get_right_child()
+            else:
+                node = None
+    return result
+
+
+def pre_order_iterative1(root, result):
     if root is None:
         return
     stack = [root]
@@ -85,6 +109,24 @@ def pre_order_iterative(root, result):
             stack.append(node.get_left_child())
 
     print("Result from here: ")
+    return result
+
+
+def pre_order_iterative(root, result):
+    if root is None:
+        return
+
+    node = root
+    stack = []
+
+    while node or stack:
+        if node:
+            result.append(node.value)
+            stack.append(node)
+            node = node.get_left_child()
+        else:
+            node = stack.pop()
+            node = node.get_right_child()
     return result
 
 
