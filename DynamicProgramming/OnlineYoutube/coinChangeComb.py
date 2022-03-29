@@ -25,3 +25,4 @@ def coinChange(target, dino):
 
 
 print(coinChange(7, [2, 3, 5]))
+print(coinChange(8, [2, 3, 5, 4]))
